@@ -13,6 +13,7 @@
  */
 package org.sonatype.plexus.appevents;
 
+import javax.enterprise.inject.Typed;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -22,7 +23,8 @@ import javax.inject.Singleton;
  * 
  * @author cstamas
  */
-@Named
+@Named( "default" )
+@Typed( EventMulticaster.class )
 @Singleton
 public class SimpleEventMulticaster
     extends AbstractSimpleEventMulticaster
