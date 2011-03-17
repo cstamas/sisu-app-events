@@ -13,7 +13,8 @@
  */
 package org.sonatype.plexus.appevents;
 
-import org.codehaus.plexus.component.annotations.Component;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 /**
  * The Class ProximityEventMulticasterComponent implements multicasting. Used by Repository and Registry
@@ -21,7 +22,8 @@ import org.codehaus.plexus.component.annotations.Component;
  * 
  * @author cstamas
  */
-@Component( role = EventMulticaster.class )
+@Named
+@Singleton
 public class SimpleEventMulticaster
     extends AbstractSimpleEventMulticaster
     implements EventMulticaster

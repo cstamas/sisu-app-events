@@ -1,26 +1,14 @@
 package org.sonatype.plexus.appevents;
 
-import org.codehaus.plexus.component.annotations.Requirement;
-import org.codehaus.plexus.logging.AbstractLogEnabled;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Disposable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
-import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
+import javax.inject.Inject;
 
+//TODO: dispose is gone now, need some other means to remove listener automagically
 public abstract class AbstractApplicationEventListener
-    extends AbstractLogEnabled
-    implements EventListener, Initializable, Disposable
+    implements EventListener
 {
-    @Requirement
-    private ApplicationEventMulticaster applicationEventMulticaster;
-
-    public void initialize()
-        throws InitializationException
+    @Inject
+    public AbstractApplicationEventListener( ApplicationEventMulticaster applicationEventMulticaster )
     {
         applicationEventMulticaster.addEventListener( this );
-    }
-
-    public void dispose()
-    {
-        applicationEventMulticaster.removeEventListener( this );
     }
 }

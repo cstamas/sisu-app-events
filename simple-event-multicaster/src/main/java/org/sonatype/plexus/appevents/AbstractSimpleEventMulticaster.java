@@ -15,7 +15,9 @@ package org.sonatype.plexus.appevents;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.codehaus.plexus.logging.AbstractLogEnabled;
+import javax.inject.Inject;
+
+import org.slf4j.Logger;
 
 /**
  * Simple implementation. The Class ProximityEventMulticasterComponent implements multicasting. Used by Repository and
@@ -24,8 +26,10 @@ import org.codehaus.plexus.logging.AbstractLogEnabled;
  * @author cstamas
  */
 public abstract class AbstractSimpleEventMulticaster
-    extends AbstractLogEnabled
 {
+    @Inject
+    private Logger logger;
+
     /** The proximity event listeners. */
     private CopyOnWriteArrayList<EventListener> proximityEventListeners = new CopyOnWriteArrayList<EventListener>();
 
@@ -41,11 +45,10 @@ public abstract class AbstractSimpleEventMulticaster
 
     public void notifyEventListeners( Event<?> evt )
     {
-        if ( getLogger().isDebugEnabled() )
+        if ( logger.isDebugEnabled() )
         {
-            getLogger().debug(
-                               "Notifying " + proximityEventListeners.size() + " EventListener about event "
-                                   + evt.getClass().getName() + " fired (" + evt.toString() + ")" );
+            logger.debug( "Notifying " + proximityEventListeners.size() + " EventListener about event "
+                + evt.getClass().getName() + " fired (" + evt.toString() + ")" );
         }
 
         for ( EventListener l : proximityEventListeners )
@@ -56,7 +59,7 @@ public abstract class AbstractSimpleEventMulticaster
             }
             catch ( Exception e )
             {
-                getLogger().info( "Unexpected exception in listener, continuing listener notification.", e );
+                logger.info( "Unexpected exception in listener, continuing listener notification.", e );
             }
         }
     }
