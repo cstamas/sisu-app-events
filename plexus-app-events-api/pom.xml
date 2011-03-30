@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.sonatype.plexus.appevents</groupId>
 		<artifactId>plexus-app-events</artifactId>
-		<version>1.1</version>
+		<version>1.2-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>plexus-app-events-api</artifactId>
